@@ -1,5 +1,5 @@
 # HOW TO USE THIS SPEC
-This is the full specification for CrushIt. Do NOT try to build everything at once. Work through Development Phases in order. When asked to start, confirm which phase you are working on and list the first 3 files you will create before writing any code.
+This is the full specification for CrushIt.
 
 ---
 
