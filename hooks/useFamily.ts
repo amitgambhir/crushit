@@ -153,7 +153,8 @@ export function useUpdateKid() {
       const { error } = await supabase
         .from('profiles')
         .update(updates)
-        .eq('id', kidId);
+        .eq('id', kidId)
+        .eq('family_id', family!.id);
       if (error) throw error;
     },
     onSuccess: (_data, { kidId }) => {

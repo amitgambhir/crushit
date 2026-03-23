@@ -4,7 +4,7 @@ import {
   TouchableOpacity, TextInput, Modal,
 } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
-import { useKidDetail, useStreaks } from '@/hooks/useFamily';
+import { useKidDetail, useStreaks, useUpdateKid } from '@/hooks/useFamily';
 import { useTasks, useAwardCrushDrop } from '@/hooks/useTasks';
 import { KidAvatar } from '@/components/ui/KidAvatar';
 import { LevelBar } from '@/components/ui/LevelBar';
@@ -20,10 +20,13 @@ export default function KidDetailScreen() {
   const { data: streaks = [] } = useStreaks(id);
   const { data: tasks = [] } = useTasks({ assignedTo: id });
   const crushDrop = useAwardCrushDrop();
+  const updateKid = useUpdateKid();
 
   const [showCrushDrop, setShowCrushDrop] = useState(false);
+  const [showEditName, setShowEditName] = useState(false);
   const [dropPoints, setDropPoints] = useState('');
   const [dropReason, setDropReason] = useState('');
+  const [editedName, setEditedName] = useState('');
 
   const dailyStreak = streaks.find(s => s.streak_type === 'daily');
   const weeklyStreak = streaks.find(s => s.streak_type === 'weekly');
@@ -36,6 +39,29 @@ export default function KidDetailScreen() {
     setShowCrushDrop(false);
     setDropPoints('');
     setDropReason('');
+  }
+
+  function openEditName() {
+    if (!kid) return;
+    setEditedName(kid.display_name);
+    setShowEditName(true);
+  }
+
+  async function handleSaveName() {
+    if (!kid) return;
+
+    const nextName = editedName.trim();
+    if (!nextName || nextName === kid.display_name) {
+      setShowEditName(false);
+      setEditedName(kid.display_name);
+      return;
+    }
+
+    await updateKid.mutateAsync({
+      kidId: id,
+      updates: { display_name: nextName },
+    });
+    setShowEditName(false);
   }
 
   if (!kid) return null;
@@ -64,7 +90,12 @@ export default function KidDetailScreen() {
             size={72}
             level={kid.level}
           />
-          <Text style={styles.name}>{kid.display_name}</Text>
+          <View style={styles.nameRow}>
+            <Text style={styles.name}>{kid.display_name}</Text>
+            <TouchableOpacity style={styles.editNameBtn} onPress={openEditName}>
+              <Text style={styles.editNameBtnText}>Edit name</Text>
+            </TouchableOpacity>
+          </View>
           {kid.username && <Text style={styles.username}>@{kid.username}</Text>}
         </View>
 
@@ -170,6 +201,48 @@ export default function KidDetailScreen() {
           </View>
         </View>
       </Modal>
+
+      {/* Edit name modal */}
+      <Modal visible={showEditName} transparent animationType="slide">
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalCard}>
+            <Text style={styles.modalTitle}>Edit Kid Name</Text>
+            <Text style={styles.modalSub}>
+              Update how this kid appears across the family app.
+            </Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Display name"
+              placeholderTextColor={Colors.textMuted}
+              value={editedName}
+              onChangeText={setEditedName}
+              autoCapitalize="words"
+              autoCorrect={false}
+              maxLength={40}
+            />
+            <View style={styles.modalActions}>
+              <Button
+                label="Cancel"
+                onPress={() => {
+                  setShowEditName(false);
+                  setEditedName(kid.display_name);
+                }}
+                variant="ghost"
+                fullWidth={false}
+                size="sm"
+              />
+              <Button
+                label="Save"
+                onPress={handleSaveName}
+                isLoading={updateKid.isPending}
+                disabled={!editedName.trim() || editedName.trim() === kid.display_name}
+                fullWidth={false}
+                size="sm"
+              />
+            </View>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -189,7 +262,15 @@ const styles = StyleSheet.create({
   },
   crushDropText: { fontFamily: Fonts.nunitoBold, fontSize: FontSize.sm, color: Colors.primary },
   profile: { alignItems: 'center', gap: Spacing.xs },
+  nameRow: { alignItems: 'center', gap: Spacing.xs },
   name: { fontFamily: Fonts.nunitoBlack, fontSize: FontSize.xxl, color: Colors.text },
+  editNameBtn: {
+    paddingHorizontal: Spacing.sm,
+    paddingVertical: 4,
+    borderRadius: Radius.full,
+    backgroundColor: Colors.surface2,
+  },
+  editNameBtnText: { fontFamily: Fonts.nunitoBold, fontSize: FontSize.xs, color: Colors.primary },
   username: { fontFamily: Fonts.inter, fontSize: FontSize.sm, color: Colors.textMuted },
   statsRow: { flexDirection: 'row', gap: Spacing.md },
   statCard: {

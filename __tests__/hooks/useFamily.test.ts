@@ -195,7 +195,9 @@ describe('useUpdateMyProfile', () => {
 describe('useUpdateKid', () => {
   it('updates the requested kid and scopes the write by kid id', async () => {
     mockQueryBuilder.update.mockReturnThis();
-    mockQueryBuilder.eq.mockResolvedValueOnce({ data: null, error: null });
+    mockQueryBuilder.eq
+      .mockImplementationOnce(() => mockQueryBuilder)
+      .mockResolvedValueOnce({ data: null, error: null });
 
     const { wrapper } = makeWrapper();
     const { result } = renderHook(() => useUpdateKid(), { wrapper });
@@ -213,11 +215,14 @@ describe('useUpdateKid', () => {
       color_theme: '#8BC34A',
     });
     expect(mockQueryBuilder.eq).toHaveBeenCalledWith('id', 'kid-123');
+    expect(mockQueryBuilder.eq).toHaveBeenCalledWith('family_id', FAMILY_ID);
   });
 
   it('surfaces update errors from Supabase', async () => {
     mockQueryBuilder.update.mockReturnThis();
-    mockQueryBuilder.eq.mockResolvedValueOnce({ data: null, error: new Error('kid update failed') });
+    mockQueryBuilder.eq
+      .mockImplementationOnce(() => mockQueryBuilder)
+      .mockResolvedValueOnce({ data: null, error: new Error('kid update failed') });
 
     const { wrapper } = makeWrapper();
     const { result } = renderHook(() => useUpdateKid(), { wrapper });
