@@ -1098,21 +1098,3 @@ npx supabase db push
 
 9. **App Name & Branding**: **CrushIt** — the feeling of crushing a task and owning it. Logo: a bold lightning bolt breaking through a checkmark. Tagline: *"Crush tasks. Earn rewards. Repeat."* Sound design: a satisfying crunch/thud sound effect when a task is marked complete. Mascot option: a small fierce monster named **Crush** (think Duolingo owl but punchy).
 
----
-
-## 🎓 FINAL INSTRUCTION TO CLAUDE CODE
-
-Start by:
-1. Creating the Supabase schema migrations and seed files
-2. Scaffolding the Expo project with the directory structure above
-3. Implementing the Supabase client and auth hooks
-4. Building the auth flow (welcome → sign up → family setup)
-5. Then implement parent dashboard → task management → reward management
-6. Then implement kid dashboard → tasks view → reward store
-7. Then layer in the gamification (points animations, streaks, badges, levels)
-
-At each step, prioritize a **working, testable feature** over perfection. Use placeholder Lottie animations if real ones aren't ready. Comment all business logic clearly.
-
-The app should feel like a **premium, delightful product** — not a school project. Every transition should be smooth, every interaction should have haptic + visual feedback, and every kid interaction should feel celebratory.
-
-**Build this as if a family is going to use it starting tomorrow. Every kid who opens CrushIt should feel like a champion.**
