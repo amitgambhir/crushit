@@ -9,6 +9,7 @@ import { useKids } from '@/hooks/useFamily';
 import { TaskCard } from '@/components/ui/TaskCard';
 import { ApprovalCard } from '@/components/ui/ApprovalCard';
 import { KidAvatar } from '@/components/ui/KidAvatar';
+import { Emoji } from '@/components/ui/Emoji';
 import { Colors, Fonts, FontSize, Spacing, Radius } from '@/constants/theme';
 import type { TaskCategory } from '@/lib/database.types';
 
@@ -65,6 +66,7 @@ export default function TasksScreen() {
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
+          style={styles.filterScroll}
           contentContainerStyle={styles.kidFilter}
         >
           <TouchableOpacity
@@ -108,6 +110,7 @@ export default function TasksScreen() {
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
+        style={styles.filterScroll}
         contentContainerStyle={styles.categoryFilter}
       >
         <TouchableOpacity
@@ -129,12 +132,15 @@ export default function TasksScreen() {
               selectedCategory === cat.key ? undefined : cat.key,
             )}
           >
-            <Text style={[
-              styles.categoryChipText,
-              selectedCategory === cat.key && styles.categoryChipTextActive,
-            ]}>
-              {cat.icon} {cat.label}
-            </Text>
+            <View style={styles.categoryChipContent}>
+              <Emoji size={16}>{cat.icon}</Emoji>
+              <Text style={[
+                styles.categoryChipText,
+                selectedCategory === cat.key && styles.categoryChipTextActive,
+              ]}>
+                {cat.label}
+              </Text>
+            </View>
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -183,9 +189,9 @@ export default function TasksScreen() {
         ListEmptyComponent={
           !isLoading ? (
             <View style={styles.empty}>
-              <Text style={styles.emptyEmoji}>
+              <Emoji size={48}>
                 {activeTab === 'submitted' ? '✅' : activeTab === 'pending' ? '📋' : '🏆'}
-              </Text>
+              </Emoji>
               <Text style={styles.emptyText}>
                 {activeTab === 'submitted'
                   ? 'No tasks waiting for approval'
@@ -213,19 +219,25 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.md, paddingVertical: Spacing.xs + 2,
   },
   addBtnText: { fontFamily: Fonts.nunitoBold, fontSize: FontSize.sm, color: Colors.text },
+  filterScroll: {
+    maxHeight: 56,
+    flexGrow: 0,
+  },
 
   // Kid filter
   kidFilter: {
     paddingHorizontal: Spacing.lg,
     gap: Spacing.sm,
     paddingBottom: Spacing.sm,
+    alignItems: 'center',
   },
   kidChip: {
     flexDirection: 'row',
     alignItems: 'center',
+    alignSelf: 'center',
     gap: Spacing.xs,
     paddingHorizontal: Spacing.sm + 2,
-    paddingVertical: Spacing.xs,
+    height: 40,
     borderRadius: Radius.full,
     backgroundColor: Colors.surface,
     borderWidth: 1,
@@ -243,10 +255,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.lg,
     gap: Spacing.xs,
     paddingBottom: Spacing.sm,
+    alignItems: 'center',
   },
   categoryChip: {
+    alignSelf: 'center',
+    justifyContent: 'center',
     paddingHorizontal: Spacing.sm + 2,
-    paddingVertical: Spacing.xs,
+    height: 36,
     borderRadius: Radius.full,
     backgroundColor: Colors.surface,
     borderWidth: 1,
@@ -256,6 +271,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.surface2,
     borderColor: Colors.primary,
   },
+  categoryChipContent: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   categoryChipText: { fontFamily: Fonts.inter, fontSize: FontSize.xs, color: Colors.textMuted },
   categoryChipTextActive: { color: Colors.text },
 
@@ -273,6 +289,5 @@ const styles = StyleSheet.create({
   badge: { color: Colors.secondary },
   list: { padding: Spacing.lg, gap: Spacing.sm },
   empty: { alignItems: 'center', paddingVertical: Spacing.xxl, gap: Spacing.sm },
-  emptyEmoji: { fontSize: 48 },
   emptyText: { fontFamily: Fonts.inter, fontSize: FontSize.md, color: Colors.textMuted, textAlign: 'center' },
 });
