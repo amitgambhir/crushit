@@ -20,8 +20,8 @@ export default function KidLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'My Crushes',
-          tabBarIcon: ({ color, size }) => <Ionicons name="flash-outline" size={size} color={color} />,
+          title: 'Home',
+          tabBarIcon: ({ color, size }) => <Ionicons name="home-outline" size={size} color={color} />,
         }}
       />
       <Tabs.Screen
@@ -32,24 +32,30 @@ export default function KidLayout() {
         }}
       />
       <Tabs.Screen
-        name="store"
+        name="store/index"
         options={{
           title: 'Store',
-          tabBarIcon: ({ color, size }) => <Ionicons name="storefront-outline" size={size} color={color} />,
+          tabBarIcon: ({ color, size }) => <Ionicons name="gift-outline" size={size} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="trophies"
+        name="trophies/index"
         options={{
           title: 'Trophies',
-          tabBarIcon: ({ color, size }) => <Ionicons name="trophy-outline" size={size} color={color} />,
+          tabBarIcon: ({ color, size }) => <Ionicons name="ribbon-outline" size={size} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="profile/index"
         options={{
           title: 'Me',
           tabBarIcon: ({ color, size }) => <Ionicons name="person-outline" size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="store/[id]"
+        options={{
+          href: null,
         }}
       />
     </Tabs>
