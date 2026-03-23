@@ -1,0 +1,44 @@
+{
+  "expo": {
+    "name": "CrushIt",
+    "slug": "crushit",
+    "scheme": "crushit",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0F0F0F"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-notifications",
+      "expo-image-picker",
+      "expo-apple-authentication",
+      [
+        "expo-build-properties",
+        { "ios": { "deploymentTarget": "15.1" } }
+      ]
+    ],
+    "ios": {
+      "usesAppleSignIn": true,
+      "bundleIdentifier": "com.yourfamily.crushit",
+      "supportsTablet": false
+    },
+    "android": {
+      "package": "com.yourfamily.crushit",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0F0F0F"
+      }
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
