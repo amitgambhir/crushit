@@ -95,8 +95,10 @@ const styles = StyleSheet.create({
   appName: {
     fontFamily: Fonts.nunitoBlack,
     fontSize: 52,
+    lineHeight: 60,
     color: Colors.text,
-    letterSpacing: -1,
+    letterSpacing: -0.5,
+    paddingRight: 6,
   },
   tagline: {
     fontFamily: Fonts.nunitoSemibold,
