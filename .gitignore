@@ -32,6 +32,7 @@ coverage/
 
 # Local backup / scratch files
 *.bak
+*app-store-metadata
 
 # Logs
 *.log

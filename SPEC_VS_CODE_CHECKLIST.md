@@ -198,11 +198,11 @@ App targets kids — Apple will ask about children's privacy during submission. 
 - [ ] **Prepare App Store screenshots.**
 Required sizes: 6.7" (iPhone 15 Pro Max) and 6.5" (iPhone 11 Pro Max). Minimum 3 screenshots per size. Show: welcome screen, parent dashboard, kid dashboard, task completion, reward store.
 
-- [ ] **Write App Store description and keywords.**
-Description, promotional text, keywords, support URL, marketing URL.
+- [x] **Write App Store description and keywords.**
+Full metadata drafted in `docs/app-store-metadata.md`: name, subtitle, description, keywords, categories, age rating, support/privacy URLs.
 
-- [ ] **Prepare App Review notes.**
-Include demo parent account credentials and a demo kid account so the reviewer can test both flows. Explain the parent PIN feature.
+- [x] **Prepare App Review notes.**
+Drafted in `docs/app-store-metadata.md`. Includes parent + kid demo credentials, step-by-step testing flow, and feature notes. **Before submission:** create the test accounts (`review-parent@crushit-test.com` / `ReviewFamily` / `reviewkid`) in Supabase with seed data.
 
 ### Phase D — Build & Submit
 
