@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Share, Alert } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Share, Alert, Linking } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useAuthStore } from '@/store/authStore';
 import { useAuth } from '@/hooks/useAuth';
@@ -107,15 +108,15 @@ export default function SettingsScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionLabel}>Legal</Text>
           <View style={styles.card}>
-            <View style={styles.row}>
+            <TouchableOpacity style={styles.row} onPress={() => Linking.openURL('https://amitgambhir.github.io/crushit-legal/')}>
               <Text style={styles.rowLabel}>Privacy Policy</Text>
-              <Text style={styles.rowMuted}>crushitapp.com/privacy</Text>
-            </View>
+              <Ionicons name="open-outline" size={16} color={Colors.textMuted} />
+            </TouchableOpacity>
             <View style={styles.divider} />
-            <View style={styles.row}>
+            <TouchableOpacity style={styles.row} onPress={() => Linking.openURL('https://amitgambhir.github.io/crushit-legal/terms')}>
               <Text style={styles.rowLabel}>Terms of Service</Text>
-              <Text style={styles.rowMuted}>crushitapp.com/terms</Text>
-            </View>
+              <Ionicons name="open-outline" size={16} color={Colors.textMuted} />
+            </TouchableOpacity>
           </View>
         </View>
 

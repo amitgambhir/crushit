@@ -149,3 +149,81 @@ Client-side compress → Storage upload → signed URL → parent approval viewe
 
 - [ ] App Store submission prep.
 Icons, splash, metadata, privacy manifest, review notes.
+
+---
+
+## P7 - App Store Submission Checklist
+
+Tracked here so we can update status as each item is completed.
+
+### Phase A — Account & Config
+
+- [ ] **Enroll in Apple Developer Program ($99/year).**
+Free personal team cannot publish to the App Store. Enroll at [developer.apple.com/programs](https://developer.apple.com/programs/).
+
+- [x] **Fix bundle ID mismatch.**
+Updated `app.json` → `ios.bundleIdentifier` and `android.package` to `com.amitgambhir.crushit`. Also fixed URL scheme in `Info.plist`.
+
+- [x] **Create `eas.json` with build profiles.**
+Created with `development`, `preview`, and `production` profiles. Auto-increment enabled for production. Submit config includes Apple team ID.
+
+- [ ] **Publish privacy policy and terms of service.**
+Settings links to `crushitapp.com/privacy` and `crushitapp.com/terms`. Apple reviews these — they must be live, publicly accessible web pages before submission.
+
+### Phase B — Code Changes
+
+- [x] **Add React ErrorBoundary at root layout.**
+Added `ErrorBoundary` class component in `app/_layout.tsx` wrapping the entire app. Shows branded error screen with "Try Again" button.
+
+- [ ] **Add crash reporting (Sentry or similar).**
+No production crash visibility. Recommended before public launch.
+
+- [x] **Replace generic permission descriptions in Info.plist.**
+Updated camera, microphone, and photo library descriptions to explain CrushIt-specific usage (task proof photos/videos).
+
+- [x] **Fix iOS minimum version — set to iOS 18.0 everywhere.**
+Updated all 5 locations: `app.json` deploymentTarget, `Info.plist` LSMinimumSystemVersion, `project.pbxproj` (4 occurrences), and `Podfile` fallback.
+
+- [ ] **Remove `NSAllowsLocalNetworking` for production build.**
+Not a blocker but cleaner. Currently `true` in Info.plist for dev Metro access.
+
+### Phase C — App Store Connect Setup
+
+- [ ] **Create app record in App Store Connect.**
+Set name, subtitle, category (Education or Lifestyle), and age rating.
+
+- [ ] **COPPA / Kids category compliance.**
+App targets kids — Apple will ask about children's privacy during submission. Requires clear data handling documentation. If listing in the Kids category, additional restrictions apply (no third-party analytics, no ads, etc.).
+
+- [ ] **Prepare App Store screenshots.**
+Required sizes: 6.7" (iPhone 15 Pro Max) and 6.5" (iPhone 11 Pro Max). Minimum 3 screenshots per size. Show: welcome screen, parent dashboard, kid dashboard, task completion, reward store.
+
+- [ ] **Write App Store description and keywords.**
+Description, promotional text, keywords, support URL, marketing URL.
+
+- [ ] **Prepare App Review notes.**
+Include demo parent account credentials and a demo kid account so the reviewer can test both flows. Explain the parent PIN feature.
+
+### Phase D — Build & Submit
+
+- [ ] **Configure App Store code signing.**
+Distribution certificate + provisioning profile. EAS handles this automatically with a paid Apple Developer account.
+
+- [ ] **Run a TestFlight beta.**
+Build with `eas build --platform ios --profile production`, upload to App Store Connect, distribute via TestFlight to real users before public release.
+
+- [ ] **Submit for App Review.**
+Upload build, fill in all metadata, submit. Typical review takes 24-48 hours.
+
+### Already Passing
+
+| Item | Status | Notes |
+|------|--------|-------|
+| App icon (1024x1024) | ✅ | `assets/icon.png` correctly configured |
+| Splash screen | ✅ | `assets/splash.png` 704x1520, dark background |
+| Privacy manifest | ✅ | `ios/CrushIt/PrivacyInfo.xcprivacy` — all required API categories declared |
+| App Transport Security | ✅ | No arbitrary loads allowed, TLS enforced |
+| Environment variables | ✅ | Only `EXPO_PUBLIC_` vars exposed, no secrets in code |
+| Legal screens | ✅ | Delete account, data export, privacy/terms links all implemented |
+| Version numbers | ✅ | Synchronized at 1.0.0 across app.json, Info.plist, package.json |
+| Deep linking | ✅ | `crushit://` scheme configured |

@@ -19,16 +19,16 @@
       "expo-apple-authentication",
       [
         "expo-build-properties",
-        { "ios": { "deploymentTarget": "15.1" } }
+        { "ios": { "deploymentTarget": "18.0" } }
       ]
     ],
     "ios": {
       "usesAppleSignIn": true,
-      "bundleIdentifier": "com.yourfamily.crushit",
+      "bundleIdentifier": "com.amitgambhir.crushit",
       "supportsTablet": false
     },
     "android": {
-      "package": "com.yourfamily.crushit",
+      "package": "com.amitgambhir.crushit",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0F0F0F"

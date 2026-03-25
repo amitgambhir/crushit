@@ -26,6 +26,10 @@ Kids earn "Crush Points" by completing tasks approved by parents. Points redeem 
 | 2 | 2.6 | ✅ Done | Streak milestone management UI, SPEC checklist + CLAUDE.md updated |
 | 3 | — | ⬜ | Polish, photo proof, recurring tasks, App Store |
 
+### App Store Submission Tracking
+
+Full App Store readiness checklist is maintained in `SPEC_VS_CODE_CHECKLIST.md` § **P7 - App Store Submission Checklist**. Covers account setup, code changes, App Store Connect metadata, and build/submit steps. Update status there as items are completed.
+
 ### Known Phase 3 gaps (deferred by design)
 
 | Area | What's missing | Where to build it |

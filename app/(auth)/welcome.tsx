@@ -60,9 +60,9 @@ export default function WelcomeScreen() {
           Your privacy is protected ·{' '}
           <Text
             style={styles.privacyLink}
-            onPress={() => Linking.openURL('https://crushitapp.com/privacy')}
+            onPress={() => Linking.openURL('https://amitgambhir.github.io/crushit-legal/')}
           >
-            crushitapp.com/privacy
+            Privacy Policy
           </Text>
         </Text>
       </View>

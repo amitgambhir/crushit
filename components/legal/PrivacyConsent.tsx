@@ -11,8 +11,8 @@ interface PrivacyConsentProps {
   onChange: (value: boolean) => void;
 }
 
-const PRIVACY_URL = 'https://crushitapp.com/privacy';
-const TERMS_URL = 'https://crushitapp.com/terms';
+const PRIVACY_URL = 'https://amitgambhir.github.io/crushit-legal/';
+const TERMS_URL = 'https://amitgambhir.github.io/crushit-legal/terms';
 
 export function PrivacyConsent({ value, onChange }: PrivacyConsentProps) {
   return (
