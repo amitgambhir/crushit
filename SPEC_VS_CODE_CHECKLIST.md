@@ -175,8 +175,8 @@ Live at `amitgambhir.github.io/crushit-legal/` (privacy) and `/terms` (ToS). App
 - [x] **Add React ErrorBoundary at root layout.**
 Added `ErrorBoundary` class component in `app/_layout.tsx` wrapping the entire app. Shows branded error screen with "Try Again" button.
 
-- [ ] **Add crash reporting (Sentry or similar).**
-No production crash visibility. Recommended before public launch.
+- [x] **Add crash reporting (Sentry).**
+`@sentry/react-native` installed. DSN via `EXPO_PUBLIC_SENTRY_DSN` env var. Disabled in dev (`enabled: !__DEV__`). ErrorBoundary reports caught errors via `Sentry.captureException`. Root layout wrapped with `Sentry.wrap()`.
 
 - [x] **Replace generic permission descriptions in Info.plist.**
 Updated camera, microphone, and photo library descriptions to explain CrushIt-specific usage (task proof photos/videos).

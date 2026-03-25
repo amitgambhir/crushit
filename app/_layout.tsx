@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { Stack, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
+import * as Sentry from '@sentry/react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
@@ -30,6 +31,13 @@ import { useNotifications } from '@/hooks/useNotifications';
 
 SplashScreen.preventAutoHideAsync();
 
+// ── Sentry ────────────────────────────────────────────────────────────────────
+Sentry.init({
+  dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
+  tracesSampleRate: 0.2,
+  enabled: !__DEV__,
+});
+
 // ── Error Boundary ──────────────────────────────────────────────────────────
 class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
@@ -39,6 +47,10 @@ class ErrorBoundary extends React.Component<
 
   static getDerivedStateFromError() {
     return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    Sentry.captureException(error, { extra: { componentStack: errorInfo.componentStack } });
   }
 
   render() {
@@ -64,7 +76,7 @@ class ErrorBoundary extends React.Component<
   }
 }
 
-export default function RootLayout() {
+function RootLayout() {
   const router = useRouter();
   const segments = useSegments();
   const { session, profile, isLoading, setSession, setLoading } = useAuthStore();
@@ -145,3 +157,5 @@ export default function RootLayout() {
     </ErrorBoundary>
   );
 }
+
+export default Sentry.wrap(RootLayout);

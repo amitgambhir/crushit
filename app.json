@@ -19,8 +19,13 @@
       "expo-apple-authentication",
       [
         "expo-build-properties",
-        { "ios": { "deploymentTarget": "18.0" } }
-      ]
+        {
+          "ios": {
+            "deploymentTarget": "18.0"
+          }
+        }
+      ],
+      "@sentry/react-native"
     ],
     "ios": {
       "usesAppleSignIn": true,
