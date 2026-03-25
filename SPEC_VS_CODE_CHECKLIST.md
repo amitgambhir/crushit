@@ -167,8 +167,8 @@ Updated `app.json` → `ios.bundleIdentifier` and `android.package` to `com.amit
 - [x] **Create `eas.json` with build profiles.**
 Created with `development`, `preview`, and `production` profiles. Auto-increment enabled for production. Submit config includes Apple team ID.
 
-- [ ] **Publish privacy policy and terms of service.**
-Settings links to `crushitapp.com/privacy` and `crushitapp.com/terms`. Apple reviews these — they must be live, publicly accessible web pages before submission.
+- [x] **Publish privacy policy and terms of service.**
+Live at `amitgambhir.github.io/crushit-legal/` (privacy) and `/terms` (ToS). App links updated. Contact email set to `crushitapp.legal@gmail.com`. COPPA parental consent method, minimum age, CCPA "Do Not Sell" language all added.
 
 ### Phase B — Code Changes
 
