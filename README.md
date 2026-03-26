@@ -221,7 +221,7 @@ Each should return `Deployed Function <name>`. Verify under Supabase dashboard �
 
 In the Supabase dashboard → Database → Replication, enable Realtime for the `tasks` table and `activity_log` table. This powers the confetti celebration when a parent approves a task.
 
-### 7. Start the dev server
+### 7. Start the dev server (Expo)
 
 ```bash
 npx expo start
@@ -234,6 +234,40 @@ If Metro seems stuck on old assets or env values, restart with:
 ```bash
 npx expo start -c
 ```
+
+### 8. Run on a physical iPhone via Xcode
+
+If you want to test on a real device (recommended — emoji rendering and push notifications only work on hardware):
+
+**One-time setup:**
+
+1. Open the workspace:
+
+   ```bash
+   open ios/CrushIt.xcworkspace
+   ```
+
+2. In Xcode, select the **CrushIt** target → **Signing & Capabilities**:
+   - Check **Automatically manage signing**
+   - Set **Team** to your Apple ID (free personal team works for dev)
+   - Change **Bundle Identifier** to something unique (e.g. `com.yourname.crushit`)
+3. If using a free personal team, remove the **Sign in with Apple** and **Push Notifications** capabilities (free teams don't support these). Click the **x** on each capability to remove it.
+4. Connect your iPhone via USB. Tap **Trust This Computer** when prompted.
+5. Select your iPhone as the build target in the Xcode toolbar.
+
+**Build and run:**
+
+1. In the terminal, start Metro:
+
+   ```bash
+   npx expo start
+   ```
+
+2. In Xcode, press **Cmd + R** to build and install on your phone.
+3. First launch will show an "Untrusted Developer" alert. On your iPhone go to **Settings → General → VPN & Device Management** → tap your developer certificate → **Trust**.
+4. Relaunch the app.
+
+> **Note:** Your Mac and iPhone must be on the same Wi-Fi network for Metro to serve the JS bundle. If the app shows "No script URL provided", make sure Metro is running in your terminal.
 
 ---
 
