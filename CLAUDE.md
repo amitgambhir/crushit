@@ -4,6 +4,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ---
 
+## Key Reference Documents
+
+| Document | Purpose |
+| --- | --- |
+| `DESIGN.md` | Design system — colors, typography, spacing, components, animation, asset specs. **Update this file whenever branding or design decisions change.** |
+| `SPEC_VS_CODE_CHECKLIST.md` | Feature spec vs implementation status tracker |
+
+---
+
 ## What This Project Is
 
 **CrushIt** — a cross-platform family task & reward app (iOS primary, Android secondary).
